@@ -47,6 +47,9 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
 
   const findUserByNameOrEmail = (keyword: string): User[] => {
     const lowerSearchTerm = keyword.toLowerCase();
+    if (!data) {
+      return [];
+    }
     // TODO: handle error if fetch fails
     return data.filter(
       (user) => user.name.toLowerCase().includes(lowerSearchTerm) || user.email.toLowerCase().includes(lowerSearchTerm),
@@ -54,8 +57,10 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
   };
 
   // TODO: debounce
+
   const onSearchUser = (e: FormEvent<HTMLFormElement>) => {
-    setUsers(findUserByNameOrEmail(e.target.value));
+    const target = e.target as HTMLInputElement; // Cast to HTMLInputElement
+    setUsers(findUserByNameOrEmail(target.value));
   };
 
   // TODO handle loading or fetch from server
