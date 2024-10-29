@@ -1,6 +1,6 @@
 'use client';
 
-import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog';
+import { Dialog, DialogContent, DialogHeader } from '@/components/ui/dialog';
 import { notFound, useParams, useRouter } from 'next/navigation';
 import { useUserContext } from '@/context/UserContext';
 import { UserDetail } from '@/components/user-detail';
