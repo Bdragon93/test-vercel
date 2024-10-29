@@ -1,20 +1,18 @@
-'use client';
-
 import { SidebarProvider, SidebarTrigger } from '@/components/ui/sidebar';
 import { ThemeProvider } from '@/components/theme-provider';
 import { AppSidebar } from '@/components/app-sidebar';
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { UserProvider } from '@/context/UserContext';
+import { User } from '@/types';
 
 interface ContextLayoutProps {
+  initialUsers: User[];
   children: React.ReactNode;
 }
 
-const queryClient = new QueryClient();
-
-const ContextLayout = ({ children }: ContextLayoutProps) => {
+const ContextLayout = async ({ initialUsers, children }: ContextLayoutProps) => {
   return (
-    <QueryClientProvider client={queryClient}>
-      <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
+    <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
+      <UserProvider initialUsers={initialUsers}>
         <SidebarProvider>
           <AppSidebar />
           <main>
@@ -22,8 +20,8 @@ const ContextLayout = ({ children }: ContextLayoutProps) => {
             {children}
           </main>
         </SidebarProvider>
-      </ThemeProvider>
-    </QueryClientProvider>
+      </UserProvider>
+    </ThemeProvider>
   );
 };
 

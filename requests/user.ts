@@ -14,7 +14,7 @@ export const getUsers = async (): Promise<User[]> => {
   }
 };
 
-export const getUserPost = async (userId: string): Promise<Post[]> => {
+export const getUserPosts = async (userId: string): Promise<Post[]> => {
   try {
     const res: any = await api.get(`${process.env.NEXT_PUBLIC_GATEWAY_URL}/users/${userId}/posts`);
 

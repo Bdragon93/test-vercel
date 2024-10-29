@@ -8,7 +8,7 @@ interface ResponseData {
   success?: boolean;
 }
 
-export class api {
+export class apiGateway {
   private _request<T>(
     method: string,
     url: string,
@@ -66,4 +66,5 @@ export class api {
   }
 }
 
-export default new api();
+const api = new apiGateway();
+export default api;

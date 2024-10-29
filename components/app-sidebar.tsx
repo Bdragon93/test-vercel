@@ -1,9 +1,11 @@
 'use client';
 
-import { User } from '@/types';
-import { FormEvent, useState, useEffect } from 'react';
+import { useState, useMemo } from 'react';
 import { UsersIcon } from 'lucide-react';
 import Link from 'next/link';
+import { useDebounce } from 'use-debounce';
+import { useSidebar } from '@/components/ui/sidebar';
+
 import {
   Sidebar,
   SidebarContent,
@@ -19,11 +21,10 @@ import {
 } from '@/components/ui/sidebar';
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '@/components/ui/collapsible';
 import { ChevronRight } from 'lucide-react';
+import { Input } from '@/components/ui/input';
 
-import { SearchForm } from '@/components/search-form';
-import { ModeToggle } from '@/components/mode-toggle';
-import { useQuery } from '@tanstack/react-query';
-import { getUsers } from '@/requests/user';
+import { ThemeToggle } from '@/components/theme-toggle';
+import { useUserContext } from '@/context/UserContext';
 
 const userItem = {
   title: 'Users',
@@ -33,44 +34,30 @@ const userItem = {
 };
 
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
-  const [users, setUsers] = useState<User[]>([]);
-  const { data, isLoading } = useQuery({
-    queryKey: ['fetchUsersData'],
-    queryFn: getUsers,
-  });
+  const { state, setOpenMobile } = useSidebar();
 
-  useEffect(() => {
-    if (data) {
-      setUsers(data);
-    }
-  }, [data]);
+  const { users } = useUserContext();
+  const [searchQuery, setSearchQuery] = useState('');
+  const [debouncedSearchQuery] = useDebounce(searchQuery, 300);
 
-  const findUserByNameOrEmail = (keyword: string): User[] => {
-    const lowerSearchTerm = keyword.toLowerCase();
-    if (!data) {
-      return [];
-    }
-    // TODO: handle error if fetch fails
-    return data.filter(
+  const filteredUsers = useMemo(() => {
+    const lowerSearchTerm = searchQuery.toLowerCase();
+    return users.filter(
       (user) => user.name.toLowerCase().includes(lowerSearchTerm) || user.email.toLowerCase().includes(lowerSearchTerm),
     );
+  }, [debouncedSearchQuery]);
+
+  const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setSearchQuery(e.target.value);
   };
-
-  // TODO: debounce
-
-  const onSearchUser = (e: FormEvent<HTMLFormElement>) => {
-    const target = e.target as HTMLInputElement; // Cast to HTMLInputElement
-    setUsers(findUserByNameOrEmail(target.value));
-  };
-
-  // TODO handle loading or fetch from server
-  console.log(isLoading);
 
   return (
     <Sidebar collapsible="icon" {...props}>
       <SidebarHeader>
-        <ModeToggle />
-        <SearchForm onChange={onSearchUser} />
+        <ThemeToggle />
+        {state === 'expanded' && (
+          <Input placeholder="Search users..." value={searchQuery} onChange={handleSearchChange} className="mb-2" />
+        )}
       </SidebarHeader>
       <SidebarContent>
         <SidebarGroup>
@@ -86,10 +73,10 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
                 </CollapsibleTrigger>
                 <CollapsibleContent>
                   <SidebarMenuSub>
-                    {users?.map(({ id, name }) => (
+                    {filteredUsers.map(({ id, name }) => (
                       <SidebarMenuSubItem key={id}>
                         <SidebarMenuSubButton asChild>
-                          <Link href={`/users/${id}/posts`}>
+                          <Link href={`/users/${id}/posts`} onClick={() => setOpenMobile(false)}>
                             <span>{name}</span>
                           </Link>
                         </SidebarMenuSubButton>

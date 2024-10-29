@@ -11,12 +11,14 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
+import { useSidebar } from '@/components/ui/sidebar';
 
-export function ModeToggle() {
+export function ThemeToggle() {
   const { setTheme } = useTheme();
+  const { state } = useSidebar();
 
   return (
-    <div className="pl-2">
+    <div className={state === 'collapsed' ? '' : 'pl-2'}>
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
           <Button variant="outline" size="icon">

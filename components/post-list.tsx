@@ -1,11 +1,11 @@
-import { Post } from '@/types';
+'use client';
+
+import { usePostContext } from '@/context/PostContext';
+
 import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card';
 
-interface PostListProps {
-  posts: Post[];
-}
-
-export default function PostList({ posts }: PostListProps) {
+export default function PostList() {
+  const { posts } = usePostContext();
   return (
     <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
       {posts.map((post) => (
