@@ -1,21 +1,21 @@
-'use client';
+'use client'
 
-import * as React from 'react';
-import { Moon, Sun } from 'lucide-react';
-import { useTheme } from 'next-themes';
+import * as React from 'react'
+import { Moon, Sun } from 'lucide-react'
+import { useTheme } from 'next-themes'
 
-import { Button } from '@/components/ui/button';
+import { Button } from '@/components/ui/button'
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
-} from '@/components/ui/dropdown-menu';
-import { useSidebar } from '@/components/ui/sidebar';
+} from '@/components/ui/dropdown-menu'
+import { useSidebar } from '@/components/ui/sidebar'
 
 export function ThemeToggle() {
-  const { setTheme } = useTheme();
-  const { state } = useSidebar();
+  const { setTheme } = useTheme()
+  const { state } = useSidebar()
 
   return (
     <div className={state === 'collapsed' ? '' : 'pl-2'}>
@@ -34,5 +34,5 @@ export function ThemeToggle() {
         </DropdownMenuContent>
       </DropdownMenu>
     </div>
-  );
+  )
 }

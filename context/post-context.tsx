@@ -1,12 +1,7 @@
 'use client';
 
 import React, { createContext, useContext, useState, useCallback } from 'react';
-import { Post } from '@/types';
-
-interface PostContextType {
-  posts: Post[];
-  addPost: (post: Post) => void;
-}
+import { Post, PostContextType } from '@/types/post';
 
 const PostContext = createContext<PostContextType | undefined>(undefined);
 

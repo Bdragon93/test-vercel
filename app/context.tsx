@@ -1,8 +1,8 @@
-import { SidebarProvider, SidebarTrigger } from '@/components/ui/sidebar';
-import { ThemeProvider } from '@/components/theme-provider';
-import { AppSidebar } from '@/components/app-sidebar';
-import { UserProvider } from '@/context/UserContext';
-import { User } from '@/types';
+import { SidebarProvider, SidebarTrigger } from '@/components/ui/sidebar'
+import { ThemeProvider } from '@/components/theme-provider'
+import { AppSidebar } from '@/components/app-sidebar'
+import { UserProvider } from '@/context/UserContext'
+import { User } from '@/types'
 
 interface ContextLayoutProps {
   initialUsers: User[];
@@ -22,7 +22,7 @@ const ContextLayout = async ({ initialUsers, children }: ContextLayoutProps) => 
         </SidebarProvider>
       </UserProvider>
     </ThemeProvider>
-  );
-};
+  )
+}
 
-export default ContextLayout;
+export default ContextLayout

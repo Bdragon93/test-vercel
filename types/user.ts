@@ -26,7 +26,13 @@ export interface User {
   company: UserCompany;
 }
 
+export interface Post {
+  userId: number;
+  id: number;
+  title: string;
+  body: string;
+}
+
 export interface UserContextType {
   users: User[];
-  setUsers: React.Dispatch<React.SetStateAction<User[]>>;
 }

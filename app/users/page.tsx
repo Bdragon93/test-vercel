@@ -1,15 +1,15 @@
-import Link from 'next/link';
-import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card';
-import { User } from '@/types';
+import Link from 'next/link'
+import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card'
+import { User } from '@/types'
 
 async function getUsers() {
-  const res = await fetch('https://jsonplaceholder.typicode.com/users');
-  if (!res.ok) throw new Error('Failed to fetch users');
-  return res.json();
+  const res = await fetch('https://jsonplaceholder.typicode.com/users')
+  if (!res.ok) throw new Error('Failed to fetch users')
+  return res.json()
 }
 
 export default async function UserList() {
-  const users: User[] = await getUsers();
+  const users: User[] = await getUsers()
 
   return (
     <div className="container mx-auto p-4">
@@ -31,5 +31,5 @@ export default async function UserList() {
         ))}
       </div>
     </div>
-  );
+  )
 }

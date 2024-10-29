@@ -1,6 +1,50 @@
 {
   "extends": ["next/core-web-vitals", "next/typescript"],
   "rules": {
+    // normal
+    "quotes": ["error", "single"],
+    "no-var": "error",
+    "no-restricted-globals": ["error", "isFinite", "isNaN"],
+    "no-shadow": 0,
+    "brace-style": [
+      2,
+      "1tbs",
+      {
+        "allowSingleLine": false
+      }
+    ],
+    "indent": [
+      "error",
+      2,
+      {
+        "ignoredNodes": [
+          "JSXElement",
+          "JSXElement > *",
+          "JSXAttribute",
+          "JSXIdentifier",
+          "JSXNamespacedName",
+          "JSXMemberExpression",
+          "JSXSpreadAttribute",
+          "JSXExpressionContainer",
+          "JSXOpeningElement",
+          "JSXClosingElement",
+          "JSXText",
+          "JSXEmptyExpression",
+          "JSXSpreadChild"
+        ]
+      }
+    ],
+    "comma-dangle": ["error", "always-multiline"],
+    "no-case-declarations": "off",
+    "lines-between-class-members": ["error", "always"],
+    "no-extra-semi": "error",
+    "default-param-last": 0,
+    "no-console": [2, { "allow": ["error"] }],
+    "consistent-return": 0,
+    "no-unused-vars": 0,
+    "linebreak-style": "off",
+    "semi": ["error", "never"],
+
     // Typescript
     "@typescript-eslint/no-unused-vars": [2, { "ignoreRestSiblings": true }],
     "@typescript-eslint/no-explicit-any": 0
