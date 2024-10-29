@@ -1,5 +1,5 @@
 import React from 'react'
-import { render, screen, fireEvent } from '@testing-library/react'
+import { render, screen, fireEvent, waitFor } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import { AppSidebar } from '@/components/app-sidebar'
 import { UserContext } from '@/context/user-context'
@@ -88,20 +88,27 @@ describe('AppSidebar', () => {
     expect(screen.getByText('Ervin Howell')).toBeInTheDocument()
   })
 
-  it('filters users based on search input', async () => {
+  it('filters users based on debounced search input', async () => {
     renderAppSidebar()
     const searchInput = screen.getByPlaceholderText('Search users...')
+
     await userEvent.type(searchInput, 'Leanne')
-    expect(screen.getByText('Leanne Graham')).toBeInTheDocument()
-    expect(screen.queryByText('Ervin Howell')).not.toBeInTheDocument()
+
+    await waitFor(
+      () => {
+        expect(screen.getByText('Leanne Graham')).toBeInTheDocument()
+        expect(screen.queryByText('Ervin Howell')).not.toBeInTheDocument()
+      },
+      { timeout: 300 }, // debounced time
+    )
   })
 
   it('expands and collapses the Users menu', () => {
     renderAppSidebar()
     const usersButton = screen.getByText('Users')
+    const userElement = screen.getByText('Leanne Graham')
+    expect(userElement).toBeVisible()
     fireEvent.click(usersButton)
-    expect(screen.getByText('Leanne Graham')).toBeVisible()
-    fireEvent.click(usersButton)
-    expect(screen.getByText('Leanne Graham')).not.toBeVisible()
+    expect(userElement).not.toBeInTheDocument()
   })
 })

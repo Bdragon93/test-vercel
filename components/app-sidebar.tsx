@@ -67,7 +67,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
                 <CollapsibleTrigger asChild>
                   <SidebarMenuButton tooltip={userItem.title}>
                     {userItem.icon && <userItem.icon />}
-                    {userItem.title}
+                    <span>{userItem.title}</span>
                     <ChevronRight className="ml-auto transition-transform duration-200 group-data-[state=open]/collapsible:rotate-90" />
                   </SidebarMenuButton>
                 </CollapsibleTrigger>
