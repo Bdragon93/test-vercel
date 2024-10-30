@@ -1,38 +1,38 @@
-import api from '@/lib/api';
-import { User, Post } from '@/types';
+import api from '@/lib/api'
+import { User, Post } from '@/types/user'
 
 // TODO: add type
 
 export const getUsers = async (): Promise<User[]> => {
   try {
-    const res: any = await api.get(`${process.env.NEXT_PUBLIC_GATEWAY_URL}/users`);
+    const res: any = await api.get(`${process.env.NEXT_PUBLIC_GATEWAY_URL}/users`)
 
-    return res;
+    return res
   } catch (e) {
-    console.error('Unable to get users', e);
-    return [];
+    console.error('Unable to get users', e)
+    return []
   }
-};
+}
 
 export const getUserPosts = async (userId: string): Promise<Post[]> => {
   try {
-    const res: any = await api.get(`${process.env.NEXT_PUBLIC_GATEWAY_URL}/users/${userId}/posts`);
+    const res: any = await api.get(`${process.env.NEXT_PUBLIC_GATEWAY_URL}/users/${userId}/posts`)
 
-    return res;
+    return res
   } catch (e) {
-    console.error('Unable to get users', e);
-    return [];
+    console.error('Unable to get users', e)
+    return []
   }
-};
+}
 
 // TODO handle no user on the UI
 export const getUser = async (userId: string): Promise<User | null> => {
   try {
-    const res: any = await api.get(`${process.env.NEXT_PUBLIC_GATEWAY_URL}/users/${userId}`);
+    const res: any = await api.get(`${process.env.NEXT_PUBLIC_GATEWAY_URL}/users/${userId}`)
 
-    return res;
+    return res
   } catch (e) {
-    console.error('Unable to get users', e);
-    return null;
+    console.error('Unable to get users', e)
+    return null
   }
-};
+}

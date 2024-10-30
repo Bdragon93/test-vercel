@@ -1,6 +1,6 @@
 // import { Button } from '@/components/ui/button';
 
-import Link from 'next/link';
+import Link from 'next/link'
 export default function Home() {
   // const [users, setUsers] = useState<User[]>([]);
 
@@ -10,5 +10,5 @@ export default function Home() {
         <Link href="/users/1">Home</Link>
       </main>
     </div>
-  );
+  )
 }

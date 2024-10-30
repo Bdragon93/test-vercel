@@ -8,7 +8,7 @@ interface ResponseData {
   success?: boolean;
 }
 
-export class apiGateway {
+export class apiService {
   private _request<T>(
     method: string,
     url: string,
@@ -17,7 +17,7 @@ export class apiGateway {
     const reqHeaders: Record<string, string> = {
       'Content-Type': 'application/json',
       ...(headers || {}),
-    };
+    }
 
     return fetch(url, {
       method,
@@ -27,44 +27,44 @@ export class apiGateway {
       try {
         if (res.ok) {
           try {
-            const json: T = await res.json();
-            return json;
+            const json: T = await res.json()
+            return json
           } catch (error) {
-            console.error(error);
-            return res.ok as unknown as T;
+            console.error(error)
+            return res.ok as unknown as T
           }
         }
 
-        const json: any = await res.json();
-        return { error: json, success: false };
+        const json: any = await res.json()
+        return { error: json, success: false }
       } catch (error) {
-        console.error(`Error making request ${method} ${url}: ${error}`);
+        console.error(`Error making request ${method} ${url}: ${error}`)
       }
 
-      return undefined;
-    });
+      return undefined
+    })
   }
 
   post<T>(url: string, { headers = {}, body }: RequestOptions = {}): Promise<T | ResponseData | undefined> {
-    return this._request<T>('POST', url, { headers, body });
+    return this._request<T>('POST', url, { headers, body })
   }
 
   get<T>(url: string, { headers = {} }: RequestOptions = {}): Promise<T | ResponseData | undefined> {
-    return this._request<T>('GET', url, { headers });
+    return this._request<T>('GET', url, { headers })
   }
 
   put<T>(url: string, { headers = {}, body }: RequestOptions = {}): Promise<T | ResponseData | undefined> {
-    return this._request<T>('PUT', url, { headers, body });
+    return this._request<T>('PUT', url, { headers, body })
   }
 
   patch<T>(url: string, { headers = {}, body }: RequestOptions = {}): Promise<T | ResponseData | undefined> {
-    return this._request<T>('PATCH', url, { headers, body });
+    return this._request<T>('PATCH', url, { headers, body })
   }
 
   delete<T>(url: string, { headers = {}, body }: RequestOptions = {}): Promise<T | ResponseData | undefined> {
-    return this._request<T>('DELETE', url, { headers, body });
+    return this._request<T>('DELETE', url, { headers, body })
   }
 }
 
-const api = new apiGateway();
-export default api;
+const api = new apiService()
+export default api

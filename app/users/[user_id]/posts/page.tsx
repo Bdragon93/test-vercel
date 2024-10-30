@@ -1,25 +1,25 @@
-import { getUserPosts } from '@/requests/user';
-import Link from 'next/link';
-import { notFound } from 'next/navigation';
-import { getUser } from '@/requests/user';
-import PostList from '@/components/post-list';
-import NewPostForm from '@/components/new-post-form';
-import { PostProvider } from '@/context/PostContext';
-import { ExternalLink } from 'lucide-react';
+import { getUserPosts } from '@/requests/user'
+import Link from 'next/link'
+import { notFound } from 'next/navigation'
+import { getUser } from '@/requests/user'
+import PostList from '@/components/post-list'
+import NewPostForm from '@/components/new-post-form'
+import { PostProvider } from '@/context/post-context'
+import { ExternalLink } from 'lucide-react'
 
 export async function generateMetadata({ params }: { params: { user_id: string } }) {
-  const user = await getUser(params.user_id);
+  const user = await getUser(params.user_id)
   if (!user) {
-    return {};
+    return {}
   }
-  return { title: `Posts by ${user.name}` };
+  return { title: `Posts by ${user.name}` }
 }
 
 export default async function UserPosts({ params }: { params: { user_id: string } }) {
-  const [user, posts] = await Promise.all([getUser(params.user_id), getUserPosts(params.user_id)]);
+  const [user, posts] = await Promise.all([getUser(params.user_id), getUserPosts(params.user_id)])
 
   if (!user) {
-    return notFound();
+    return notFound()
   }
 
   return (
@@ -35,5 +35,5 @@ export default async function UserPosts({ params }: { params: { user_id: string 
         <PostList />
       </div>
     </PostProvider>
-  );
+  )
 }

@@ -1,7 +1,7 @@
-import { User } from '@/types';
+import { User } from '@/types/user'
 
 export function UserDetail({ user }: { user: User }) {
-  const { name, username, email, phone, website, company, address } = user;
+  const { name, username, email, phone, website, company, address } = user
   return (
     <main className="flex-1 p-6 overflow-auto">
       <div className="grid gap-4 py-4">
@@ -37,5 +37,5 @@ export function UserDetail({ user }: { user: User }) {
         </div>
       </div>
     </main>
-  );
+  )
 }

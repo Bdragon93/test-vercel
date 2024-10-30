@@ -1,18 +1,18 @@
-'use client';
+'use client'
 
-import { Dialog, DialogContent, DialogHeader } from '@/components/ui/dialog';
-import { notFound, useParams, useRouter } from 'next/navigation';
-import { useUserContext } from '@/context/UserContext';
-import { UserDetail } from '@/components/user-detail';
+import { Dialog, DialogContent, DialogHeader } from '@/components/ui/dialog'
+import { notFound, useParams, useRouter } from 'next/navigation'
+import { useUserContext } from '@/context/user-context'
+import { UserDetail } from '@/components/user-detail'
 
 export default function InterceptedUserModal() {
-  const router = useRouter();
-  const { user_id } = useParams();
-  const { users } = useUserContext();
-  const user = users.find((u) => u.id.toString() === user_id);
+  const router = useRouter()
+  const { user_id } = useParams()
+  const { users } = useUserContext()
+  const user = users.find((u) => u.id.toString() === user_id)
 
   if (!user) {
-    return notFound();
+    return notFound()
   }
 
   return (
@@ -22,5 +22,5 @@ export default function InterceptedUserModal() {
         <UserDetail user={user} />
       </DialogContent>
     </Dialog>
-  );
+  )
 }
