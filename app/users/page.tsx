@@ -1,6 +1,6 @@
 import Link from 'next/link'
 import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card'
-import { User } from '@/types'
+import { User } from '@/types/user'
 
 async function getUsers() {
   const res = await fetch('https://jsonplaceholder.typicode.com/users')

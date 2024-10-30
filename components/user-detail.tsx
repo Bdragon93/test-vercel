@@ -1,4 +1,4 @@
-import { User } from '@/types'
+import { User } from '@/types/user'
 
 export function UserDetail({ user }: { user: User }) {
   const { name, username, email, phone, website, company, address } = user
