@@ -2,7 +2,7 @@
 
 import { Dialog, DialogContent, DialogHeader } from '@/components/ui/dialog'
 import { notFound, useParams, useRouter } from 'next/navigation'
-import { useUserContext } from '@/context/UserContext'
+import { useUserContext } from '@/context/user-context'
 import { UserDetail } from '@/components/user-detail'
 
 export default function InterceptedUserModal() {
